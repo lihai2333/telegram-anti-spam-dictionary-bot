@@ -15,6 +15,10 @@ export default class BlockList {
     const hash = crypto.createHash('sha512');
     hash.update(text);
 
+    if (text === '') {
+      return null;
+    }
+
     return await listModel.findOne({ hash: hash.digest('hex') });
   }
 

@@ -15,7 +15,7 @@ export default async (ctx: any) => {
     .slice(8)
     .toLowerCase()
     .replace(/^\/(submit|help|start)\s/, '')
-    .replace(/[,\.，。'"*@#$_&-\+\(\)\/\?!;:（）、“”：；！？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d]/g, '')
+    .replace(/[,\.，。'"*@#$_&-\+\(\)\/\?!;:（）、“”：；！？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d…【】]/g, '')
     .replace(/\s{2,}/g, ' ')
     .replace(/\n/g, ' ');
   option = sify(option);
@@ -47,7 +47,9 @@ export default async (ctx: any) => {
     return;
   }
 
-  const then = option.replace(emoji(), '');
+  const then = option
+    .replace(emoji(), '')
+    .replace(/\s{2,}/g, ' ');
 
   try {
     await new BlockList().add(option, false);

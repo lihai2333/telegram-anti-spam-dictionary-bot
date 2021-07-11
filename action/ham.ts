@@ -11,7 +11,7 @@ export default async (ctx: any) => {
 
   await new BlockList().update(ctx.callbackQuery.message.text, false);
 
-  console.log(ctx.callbackQuery.from.id, ctx.message.text, 'ham');
+  console.log(ctx.callbackQuery.from.id, ctx.callbackQuery.message.text, 'ham');
 
   ctx.editMessageText(ctx.callbackQuery.message.text, {
     ...Markup.inlineKeyboard([

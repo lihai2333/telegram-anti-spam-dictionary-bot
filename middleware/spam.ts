@@ -12,7 +12,7 @@ export default async (ctx: any, next: any) => {
     ctx.message.text
       .toLowerCase()
       .replace(/^\/(submit|help|start)\s/, '')
-      .replace(/[,\.，。'"*@#$_&-\+\(\)\/\?!;:（）、“”：；！ ？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d]/g, '')
+      .replace(/[,\.，。'"*@#$_&-\+\(\)\/\?!;:（）、“”：；！ ？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d…【】]/g, '')
       .replace(/\s{2,}/g, ' ')
       .replace(/\n/g, ' ')
   );

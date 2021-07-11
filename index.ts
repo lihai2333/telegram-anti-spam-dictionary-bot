@@ -18,7 +18,9 @@ bot.start((ctx: any) => {
 
 bot.help((ctx: any) => {
   ctx.reply(`/submit 提交文本消息给志愿者审查
-/help 列出此列表`, { reply_to_message_id: ctx.message.message_id });
+/help 列出此列表
+
+将我添加至群组并给我删除消息的权限，我即可开始删除垃圾消息`, { reply_to_message_id: ctx.message.message_id });
 });
 
 bot.command('submit', submit);
