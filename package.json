@@ -1,0 +1,16 @@
+{
+  "name": "wordlist-bot",
+  "version": "0.0.1",
+  "private": true,
+  "author": "lihai2333",
+  "license": "AGPL-3.0",
+  "dependencies": {
+    "@types/node": "^16.3.1",
+    "chinese-conv": "^1.0.1",
+    "mongoose": "^5.13.2",
+    "telegraf": "^4.4.0"
+  },
+  "devDependencies": {
+    "typegram": "^3.4.1"
+  }
+}

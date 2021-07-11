@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "outDir": "built",
+    "module": "CommonJS",
+    "moduleResolution": "Node"
+  },
+  "files": [
+    "index.ts"
+  ]
+}
