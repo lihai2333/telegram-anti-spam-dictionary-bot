@@ -12,12 +12,12 @@ const listModel = conn.model('list', listSchema);
 
 export default class BlockList {
   async get(text: string) {
-    const hash = crypto.createHash('sha512');
-    hash.update(text);
-
     if (text === '') {
       return null;
     }
+
+    const hash = crypto.createHash('sha512');
+    hash.update(text);
 
     return await listModel.findOne({ hash: hash.digest('hex') });
   }
@@ -27,6 +27,10 @@ export default class BlockList {
   }
 
   async add(text: string, spam: boolean) {
+    if (text === '') {
+      return null;
+    }
+
     const hash = crypto.createHash('sha512');
     hash.update(text);
 
@@ -40,7 +44,12 @@ export default class BlockList {
   async update(text: string, spam: boolean) {
     const hash = crypto.createHash('sha512');
     hash.update(text);
+    const digest: string = hash.digest('hex');
 
-    await listModel.updateOne({ hash: hash.digest('hex') }, { spam });
+    await listModel.updateOne({ hash: digest }, {
+      text,
+      spam,
+      hash: digest
+    });
   }
 };

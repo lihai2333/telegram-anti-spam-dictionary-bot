@@ -9,7 +9,11 @@ export default async (ctx: any) => {
 
   ctx.answerCbQuery();
 
-  await new BlockList().update(ctx.callbackQuery.message.text, true);
+  try {
+    await new BlockList().update(ctx.callbackQuery.message.text, true);
+  } catch (err) {
+    console.log(err);
+  }
 
   console.log(ctx.callbackQuery.from.id, ctx.callbackQuery.message.text, 'spam');
 

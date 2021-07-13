@@ -14,10 +14,13 @@ export default async (ctx: any) => {
     .replace(/^\/submit(@.*?bot)?\s{1,}/i, '/submit ')
     .slice(8)
     .toLowerCase()
+    .replace(new RegExp('(\\ufe0f)', 'g'), '')
     .replace(/^\/(submit|help|start)\s/, '')
-    .replace(/[,\.，。'"*@#$_&-\+\(\)\/\?!;:（）、“”：；！？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d…【】]/g, '')
+    .replace(/[,\.，。'"*@#$_&\-\+\(\)\/\?!;:（）、“”：；！？\\\[\]~`\|•√π÷×¶∆£¢€¥\^°={}%©®™✓「」‘’［］↑\d…【】➜※丨–—☞￥★◎✘█☛✚♛－·✈⏲�➡☑☟☰✖❤⬇‼◼☪♦⬅▲『』❣▫▪✌✉⚠❇㊙♨⚜☎☄♂⬆⚠]/g, '')
     .replace(/\s{2,}/g, ' ')
-    .replace(/\n/g, ' ');
+    .replace(/\n/g, ' ')
+    .replace(/^\s+/, '');
+
   option = sify(option);
 
   if (option === '') {
@@ -25,7 +28,7 @@ export default async (ctx: any) => {
     return;
   }
 
-  if (option.length === 1) {
+  if (option.length === 1 || new Set(option).size === 1) {
     ctx.reply('很抱歉，不接受提交长度为一的消息', { reply_to_message_id: ctx.message.message_id });
     return;
   }
@@ -49,12 +52,14 @@ export default async (ctx: any) => {
 
   const then = option
     .replace(emoji(), '')
-    .replace(/\s{2,}/g, ' ');
+    .replace(new RegExp('(\\ud83c\\udff7|\\ud83c\\udd7e|\\u26f1|\\u20e3|\\ud83d\\udd78|\\ud83d\\udde3|\\u2764\\ufe0f|\\u2708\\ufe0f|\\ud83d\\udd76|\\ud83c\\udf96|\\u2601|\\ud83d\\udd77|\\ud83c\\ude37|\\ud83d\\udee9|\\ud83c\\udd71|\\ud83c\\udd70|\\uD83D\\uDDA5)', 'g'), '')
+    .replace(/\s{2,}/g, ' ')
+    .replace(/^\s+/, '');
 
   try {
     await new BlockList().add(option, false);
 
-    if (then !== option) {
+    if (then !== option && then.length > 1) {
       const l = await new BlockList().get(then);
       if (l === null) {
         await new BlockList().add(then, false);
