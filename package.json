@@ -5,12 +5,12 @@
   "author": "lihai2333",
   "license": "AGPL-3.0",
   "dependencies": {
-    "@types/node": "^16.3.1",
+    "@types/node": "^16.4.8",
     "chinese-conv": "^1.0.1",
-    "mongoose": "^5.13.2",
-    "telegraf": "^4.4.0"
+    "mongoose": "^5.13.5",
+    "telegraf": "^4.4.1"
   },
   "devDependencies": {
-    "typegram": "^3.4.1"
+    "typegram": "^3.4.2"
   }
 }
